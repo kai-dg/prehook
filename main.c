@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "utils.h"
+#include <string.h>
+#include "commands.h"
 #include "help.h"
 /**
  * main - Entry point
@@ -12,10 +13,18 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	int path_check = path_validate(argv[1]);
-	if (path_check == 0)
-		printf("is path\n");
+	if (strcmp(argv[1], "set") == 0)
+	{
+		set(argv[2]);
+	}
+	else if (strcmp(argv[1], "list") == 0)
+	{
+		if (argc == 3)
+			list(argv[2]);
+		list(argv[1]);
+	}
 	else
-		printf("is not path\n");
-	return 0;
+	{
+		printf("%s is not a command.\n", argv[1]);
+	}
 }
