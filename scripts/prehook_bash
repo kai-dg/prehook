@@ -1,7 +1,8 @@
 export PATH="$HOME/.prehook/bin:$PATH"
+export PREHOOK_PATH="$(cat ~/.prehook/connections/prehook_path)"
 prehook_preexec () {
     [ -n "$COMP_LINE" ] && return
     [ "$BASH_COMMAND" \< "$PROMPT_COMMAND" ] && return
     ls -la
 }
-trap "preexec && $BASH_COMMAND" DEBUG
+trap "prehook_preexec && $BASH_COMMAND" DEBUG
