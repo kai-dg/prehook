@@ -1,6 +1,6 @@
 CC=gcc
 
 setup:
-	$(CC) -o prehook prehook.c utils.c commands.c help.c
-	$(CC) -o prehook_bash prehook_bash.c
+	$(CC) -Wall -Werror -pedantic -o prehook prehook.c utils.c commands.c help.c
+	$(CC) -Wall -Werror -pedantic -o prehook_bash prehook_bash.c utils.c
 	# ./scripts/setup.sh

@@ -4,31 +4,50 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include "utils.h"
+#include "commands.h"
 
-int set(const char* path)
+int set(const char *path)
 {
+	FILE *cnf;
 	int path_check = path_validate(path);
-	printf("%s\n", path);
+	char command[] = "source ~/.prehook/scripts/append_conn.sh ";
+	char *prehook_path = getenv("PREHOOK_PATH");
+	char *path_copy;
+	int duplicate;
+
+	if (strcmp(path, ".") == 0)
+		path = getenv("PWD");
+
+	path_copy = strdup(path);
+	duplicate = exact_path_match(path_copy, prehook_path);
+	if (duplicate == 0)
+	{
+		printf("Prehook: This directory is already hooked.\n");
+		exit(1);
+	}
+
 	if (path_check == 0)
-		printf("is path\n");
+	{
+		strcat(command, path);
+		system(command);
+		strcat(path_copy, "/prehook_cnf");
+		cnf = fopen(path_copy, "r");
+		fclose(cnf);
+	}
 	else
+	{
 		printf("is not path\n");
-	return 0;
+		exit(1);
+	}
+	exit(0);
 }
 
 int list(const char* path)
 {
-	char* statusenv = getenv("PREHOOK_STATUS");
-	char* pwd = getenv("PWD");
-	char* to_match = "/home/harukai/00_development/prehook:/home/harukai/00_development/otherstuff";
-	char* pwd2 = "hello";
-	char* result = strstr(to_match, pwd);
-	char* result1 = strstr(to_match, pwd2);
+	char *statusenv = getenv("PREHOOK_STATUS");
 	if (strcmp(path, "list") == 0)
 	{
-		if (result1 == NULL)
-			printf("no match");
-			printf("%d\n", result1);
+		printf("%s", statusenv);
 	}
 	return 0;
 }

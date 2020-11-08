@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "commands.h"
 #include "help.h"
@@ -7,24 +8,23 @@
  */
 int main(int argc, char *argv[])
 {
-	if (argc == 1)
+	switch(argc)
 	{
-		help_all();
-		return 1;
+		case 1:
+			help_all();
+			break;
+		case 3:
+			if (strcmp(argv[1], "set") == 0)
+				set(argv[2]);
+			else
+				list(argv[2]);
+			break;
+		case 2:
+			if (strcmp(argv[1], "list") == 0)
+				list(argv[1]);
+			break;
+		default:
+			printf("%s is not a command.\n", argv[1]);
 	}
-
-	if (strcmp(argv[1], "set") == 0)
-	{
-		set(argv[2]);
-	}
-	else if (strcmp(argv[1], "list") == 0)
-	{
-		if (argc == 3)
-			list(argv[2]);
-		list(argv[1]);
-	}
-	else
-	{
-		printf("%s is not a command.\n", argv[1]);
-	}
+	return 0;
 }

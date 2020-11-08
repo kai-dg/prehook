@@ -6,7 +6,7 @@ git clone link.git ~/.prehook
 make ~/.prehook
 ```
 
-## Updating
+## Updating Prehook
 ```
 git -C pull ~/.prehook
 ```
