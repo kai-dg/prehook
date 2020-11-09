@@ -36,4 +36,4 @@ Check `tags.c` and `prehook_bash.c`
 ---
 
 ## Author
-**- [kai-dg](https://github.com/kai-dg)
+[kai-dg](https://github.com/kai-dg)
