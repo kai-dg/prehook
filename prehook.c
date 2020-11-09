@@ -3,6 +3,7 @@
 #include <string.h>
 #include "commands.h"
 #include "help.h"
+
 /**
  * main - Entry point
  */
@@ -16,6 +17,8 @@ int main(int argc, char *argv[])
 		case 3:
 			if (strcmp(argv[1], "set") == 0)
 				set(argv[2]);
+			else if (strcmp(argv[1], "unset") == 0)
+				unset(argv[2]);
 			else
 				list(argv[2]);
 			break;

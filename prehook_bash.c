@@ -3,16 +3,23 @@
 #include <string.h>
 #include <unistd.h>
 #include "utils.h"
+#include "tags.h"
 
 /* Btw, all printf will be eval'd to bash commands. */
-char *parse_tag(const char *tag)
+char *parse_tag(const char *tag, const char *command)
 {
 	if (strcmp("venv", tag) == 0)
-		printf("echo 'this is venv';");
+	{
+		tag_venv(command);
+	}
 	else if (strcmp("env", tag) == 0)
-		printf("echo 'this is env';");
+	{
+		tag_env(command);
+	}
 	else if (strcmp("gitadd", tag) == 0)
-		printf("echo 'this is gitadd';");
+	{
+		tag_gitadd(command);
+	}
 	else
 		printf("%s is not a tag\n", tag);
 	return NULL;
@@ -28,29 +35,30 @@ int parse_cnf(const char *path)
 	ssize_t read;
 	size_t len = 0;
 	char *line = NULL;
-	char *inp;
+	char *inp = NULL;
+	char *tag;
 	int is_tag = 0;
+
+	chdir(path);
 	cnf = fopen("prehook_cnf", "r");
 	if (cnf == NULL)
 	{
 		printf("Could not find %s/prehook_cnf", path);
 		exit(1);
 	}
-	chdir(path);
 	while ((read = getline(&line, &len, cnf)) != -1)
 	{
-		/* TODO switch case for tags */
 		while ((inp = strsep(&line, ":")) != NULL)
 		{
 			if (is_tag == 0)
 			{
-				parse_tag(inp);
+				tag = inp;
 				is_tag = 1;
-				
 			}
 			else
 			{
-				printf("%s;", inp);
+				parse_tag(tag, inp);
+				printf("tag: %s, command: %s\n", tag, inp);
 				is_tag = 0;
 			}
 		}
@@ -62,6 +70,7 @@ int parse_cnf(const char *path)
 }
 
 /* main - Entry point for prehook analyzer + cnf parser
+ * This gets eval'd from scripts/prehook_bash's function
 */
 int main(void)
 {
@@ -75,10 +84,9 @@ int main(void)
 		if (statusenv == NULL || strcmp("1", statusenv) == 0)
 		{
 			parse_cnf(pwd);
-			printf("source $HOME/00_development/prehook/scripts/status.sh;");
-			printf("echo 'Prehook: loading venv...';");
+			exit(0);
 			/*
-			printf(".~/.prehook/scripts/venv_activate.sh");
+			printf("source $HOME/00_development/prehook/scripts/status.sh;");
 			*/
 		}
 	}
@@ -92,6 +100,7 @@ int main(void)
 			*/
 			printf("echo 'Prehook: exiting venv...';");
 			printf("source $HOME/00_development/prehook/scripts/status.sh;");
+			exit(0);
 		}
 	}
 	return 0;
