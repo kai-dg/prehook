@@ -4,6 +4,6 @@ export PREHOOK_STATUS=""
 prehook_preexec () {
     [ -n "$COMP_LINE" ] && return
     [ "$BASH_COMMAND" \< "$PROMPT_COMMAND" ] && return
-    eval `source ~/.prehook/prehook_bash`
+    eval `~/.prehook/prehook_bash`
 }
 trap "prehook_preexec && $BASH_COMMAND" DEBUG
