@@ -2,13 +2,15 @@
 
 ## Setup
 ```
-git clone link.git ~/.prehook
-make ~/.prehook
+git clone https://github.com/kai-dg/prehook.git ~/.prehook
+cd ~/.prehook
+make install
 ```
 
 ## Updating Prehook
 ```
-git -C pull ~/.prehook
+cd ~/.prehook
+git pull
 ```
 
 ---
