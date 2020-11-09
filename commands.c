@@ -6,6 +6,8 @@
 #include "utils.h"
 #include "commands.h"
 
+/* set - Sets a path to prehook path and adds a cnf file
+ */
 int set(const char *path)
 {
 	FILE *cnf;
@@ -49,6 +51,8 @@ int set(const char *path)
 	exit(0);
 }
 
+/* unset - Unsets a prehook path and removes cnf file
+ */
 int unset(const char *path)
 {
 	FILE *cnf;
@@ -87,6 +91,9 @@ int unset(const char *path)
 	return 0;
 }
 
+/* list - Lists all prehook set paths
+ * TODO print paths nicely
+ */
 int list(const char *path)
 {
 	char *prehook_path = getenv("PREHOOK_PATH");

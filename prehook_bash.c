@@ -6,6 +6,10 @@
 #include "tags.h"
 
 /* Btw, all printf will be eval'd to bash commands. */
+/* parse_tag - Directs the tag to correct function
+ * tag: read from prehook_cnf
+ * command: read from prehook_cnf
+ */
 char *parse_tag(const char *tag, const char *command)
 {
 	if (strcmp("venv", tag) == 0)
@@ -85,9 +89,7 @@ int main(void)
 		{
 			parse_cnf(pwd);
 			exit(0);
-			/*
-			printf("source $HOME/00_development/prehook/scripts/status.sh;");
-			*/
+			printf("source ~/.prehook/scripts/status.sh;");
 		}
 	}
 	else
@@ -95,11 +97,7 @@ int main(void)
 		/* Not in directory */
 		if (strcmp("0", statusenv) == 0)
 		{
-			/*
-			printf(".~/.prehook/scripts/venv_deactivate.sh");
-			*/
-			printf("echo 'Prehook: exiting venv...';");
-			printf("source $HOME/00_development/prehook/scripts/status.sh;");
+			printf("source ~/.prehook/scripts/status.sh;");
 			exit(0);
 		}
 	}
