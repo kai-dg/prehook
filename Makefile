@@ -23,6 +23,7 @@ uninstall:
 	rmdir ~/.prehook/scripts
 	rmdir ~/.prehook
 	source ~/.bashrc
+	exec $$SHELL
 
 test:
 	$(CC) -Wall -Werror -pedantic -o prehook prehook.c utils.c commands.c help.c
