@@ -1,4 +1,6 @@
+notes
 prehook
 prehook_bash
 prehook_cnf
 connections/prehook_path
+venv/*

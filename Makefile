@@ -15,7 +15,6 @@ uninstall:
 	rm ~/.prehook/scripts/prehook_bash
 	rm ~/.prehook/scripts/setup.sh
 	rm ~/.prehook/scripts/status.sh
-	rm ~/.prehook/scripts/venv_status.sh
 	rm ~/.prehook/scripts/refresh_path.sh
 	rmdir ~/.prehook/bin
 	rmdir ~/.prehook/connections
@@ -27,5 +26,5 @@ uninstall:
 	exec $$SHELL
 
 test:
-	$(CC) -Wall -Werror -pedantic -o prehook prehook.c utils.c commands.c help.c
-	$(CC) -Wall -Werror -pedantic -o prehook_bash prehook_bash.c tags.c utils.c
+	$(CC) -Wall -Werror -pedantic -o ~/.prehook/bin/prehook prehook.c utils.c commands.c help.c
+	$(CC) -Wall -Werror -pedantic -o ~/.prehook/prehook_bash prehook_bash.c tags.c utils.c

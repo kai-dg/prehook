@@ -3,20 +3,17 @@
 #include <string.h>
 #include "tags.h"
 /* tag_venv - PYTHON: turns virtualenv off or on
- * status: 0 = turn on, 1 = turn off
+ * status: 0 = turn on, null = turn off
  */
 int tag_venv(const char *command)
 {
-	printf("source ~/.prehook/scripts/venv_status.sh;");
 	const char *statusvenv = getenv("PREHOOK_VENV");
-	if (strcmp(statusvenv, "0") == 0)
+	if (statusvenv == NULL)
 	{
 		printf("%s;", command);
+		printf("export PREHOOK_VENV=0;");
 		printf("echo 'Prehook: Loading venv...';");
-		return 0;
 	}
-	printf("deactivate;");
-	printf("echo 'Prehook: Exiting venv...';");
 	return 0;
 }
 
