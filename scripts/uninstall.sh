@@ -13,5 +13,3 @@ then
 else
     echo "Prehook Uninstall: ~/.bashrc is already clean..."
 fi
-source ~/.bashrc
-exec "$SHELL"

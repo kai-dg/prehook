@@ -16,8 +16,13 @@ uninstall:
 	rm ~/.prehook/scripts/setup.sh
 	rm ~/.prehook/scripts/status.sh
 	rm ~/.prehook/scripts/venv_status.sh
+	rmdir ~/.prehook/bin
+	rmdir ~/.prehook/connections
 	source ~/.prehook/scripts/uninstall.sh
 	rm ~/.prehook/scripts/uninstall.sh
+	rmdir ~/.prehook/scripts
+	rmdir ~/.prehook
+	source ~/.bashrc
 
 test:
 	$(CC) -Wall -Werror -pedantic -o prehook prehook.c utils.c commands.c help.c
