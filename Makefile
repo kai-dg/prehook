@@ -16,6 +16,7 @@ uninstall:
 	rm ~/.prehook/scripts/setup.sh
 	rm ~/.prehook/scripts/status.sh
 	rm ~/.prehook/scripts/venv_status.sh
+	rm ~/.prehook/scripts/refresh_path.sh
 	rmdir ~/.prehook/bin
 	rmdir ~/.prehook/connections
 	source ~/.prehook/scripts/uninstall.sh
