@@ -14,14 +14,12 @@ uninstall:
 	rm ~/.prehook/scripts/remove_conn.sh
 	rm ~/.prehook/scripts/prehook_bash
 	rm ~/.prehook/scripts/setup.sh
-	rm ~/.prehook/scripts/status.sh
 	rm ~/.prehook/scripts/refresh_path.sh
 	rmdir ~/.prehook/bin
 	rmdir ~/.prehook/connections
 	source ~/.prehook/scripts/uninstall.sh
 	rm ~/.prehook/scripts/uninstall.sh
 	rmdir ~/.prehook/scripts
-	rmdir ~/.prehook
 	source ~/.bashrc
 	exec $$SHELL
 

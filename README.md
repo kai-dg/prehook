@@ -15,7 +15,19 @@ git pull
 
 ---
 
-## Accepted Tags
+## Commands
+
+- `prehook set FOLDERPATH`
+
+Example:
+
+```
+myfolder$ prehook set .
+myfolder$ Prehook: Setting prehook to myfolder/
+myfolder$ Prehook: Created prehook_cnf file.
+```
+
+## prehook_cnf: Accepted Tags
 Note that alias's should work, as it will just run the command in your shell.
 
 - `venv`: Add the command you use to activate venv in the folder

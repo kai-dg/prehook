@@ -25,12 +25,13 @@ int set(const char *path)
 	duplicate = exact_path_match(path_copy, prehook_path);
 	if (duplicate == 0)
 	{
-		printf("Prehook: This directory is already hooked.\n");
+		printf("Prehook: This directory is already hooked\n");
 		exit(1);
 	}
 
 	if (path_check == 0)
 	{
+		printf("Prehook: Setting prehook to %s\n", path);
 		strcat(command, path);
 		system(command);
 		strcat(path_copy, "/prehook_cnf");
@@ -40,6 +41,7 @@ int set(const char *path)
 		else
 		{
 			cnf = fopen(path_copy, "w");
+			printf("Prehook: Created prehook_cnf file\n");
 			fclose(cnf);
 		}
 	}

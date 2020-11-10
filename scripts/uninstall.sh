@@ -13,3 +13,6 @@ then
 else
     echo "Prehook Uninstall: ~/.bashrc is already clean..."
 fi
+
+# TODO add C file removal
+echo 'Prehook Uninstall: Removing all C files...'
