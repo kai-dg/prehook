@@ -14,11 +14,17 @@ int check_envs(void)
 {
 	/* tag.c - tag_venv */
 	const char *venv = getenv("PREHOOK_VENV");
+	const char *venv_path = getenv("PREHOOK_VENV_PATH");
+	const char *pwd = getenv("PWD");
 	if (strcmp(venv, "0") == 0)
 	{
-		printf("deactivate;");
-		printf("unset PREHOOK_VENV;");
-		printf("echo 'Prehook: Exiting venv...';");
+		/* case of entering another folder within venv dir */
+		if (strcmp(venv_path, pwd) != 0)
+		{
+			printf("deactivate;");
+			printf("unset PREHOOK_VENV;");
+			printf("echo 'Prehook: Exiting venv...';");
+		}
 	}
 	return 0;
 }
@@ -95,6 +101,7 @@ int main(void)
 	char *prehook_path = getenv("PREHOOK_PATH");
 	char *pwd = getenv("PWD");
 	int in_dir = exact_path_match(pwd, prehook_path);
+	setenv("PREHOOK_VENV_PATH", strdup(pwd), 1);
 	if (in_dir == 0)
 	{
 		/* In directory */

@@ -1,8 +1,19 @@
 export PATH="$HOME/.prehook/bin:$PATH"
 export PREHOOK_PATH="$(cat ~/.prehook/connections/prehook_path)"
-prehook_preexec () {
-    [ -n "$COMP_LINE" ] && return
-    [ "$BASH_COMMAND" \< "$PROMPT_COMMAND" ] && return
+function PreCommand() {
+    if [ -z "$AT_PROMPT" ]; then
+        return
+    fi
+    unset AT_PROMPT
+}
+trap "PreCommand" DEBUG
+FIRST_PROMPT=1
+function PostCommand() {
+    AT_PROMPT=1
+    if [ -n "$FIRST_PROMPT" ]; then
+        unset FIRST_PROMPT
+        return
+    fi
     eval `~/.prehook/prehook_bash`
 }
-trap "prehook_preexec && $BASH_COMMAND" DEBUG
+PROMPT_COMMAND="PostCommand"
