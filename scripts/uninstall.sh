@@ -5,8 +5,9 @@ if grep -Fxq 'export PATH="$HOME/.prehook/bin:$PATH"' ~/.bashrc
 then
     LINE=$(grep -n 'export PATH="$HOME/.prehook/bin:$PATH"' ~/.bashrc | cut -d : -f 1)
     OTHERLINES=$((LINE + 8))
+    PREHOOKLINES=$(wc -l prehook_bash | cut -d " " -f 1)
     echo "Prehook Uninstall: Removing ~/.bashrc lines $LINE to $OTHERLINES..."
-    for i in {1..17};
+    for i in $(seq 1 $PREHOOKLINES);
     do
         sed -i ''"$LINE"'d' ~/.bashrc
     done
