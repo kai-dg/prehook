@@ -22,8 +22,13 @@ int tag_venv(const char *command)
  */
 int tag_env(const char *command)
 {
-	printf("echo 'Prehook: Setting env variables...';");
-	printf("%s;", command);
+	const char *envstatus = getenv("PREHOOK_ENV");
+	if (envstatus == NULL)
+	{
+		printf("export PREHOOK_ENV=0;");
+		printf("echo 'Prehook: Setting env variables...';");
+		printf("%s;", command);
+	}
 	return 0;
 }
 
