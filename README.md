@@ -1,4 +1,5 @@
 # Prehook
+Written for primarily people that live in the terminal, or vim/emacs/nano users. The primary concept is that the script in your profile (ie bashrc) is capable of running commands before and after a prompt command is entered. This allows for automatically turning on virtualenvs or exporting environment variables, as well as running tests/lints before hitting `git add`.
 
 ## Setup
 ```

@@ -14,17 +14,11 @@ int check_envs(void)
 {
 	/* tag.c - tag_venv */
 	const char *venv = getenv("PREHOOK_VENV");
-	const char *venv_path = getenv("PREHOOK_VENV_PATH");
-	const char *pwd = getenv("PWD");
 	if (strcmp(venv, "0") == 0)
 	{
-		/* case of entering another folder within venv dir */
-		if (strcmp(venv_path, pwd) != 0)
-		{
-			printf("deactivate;");
-			printf("unset PREHOOK_VENV;");
-			printf("echo 'Prehook: Exiting venv...';");
-		}
+		printf("deactivate;");
+		printf("unset PREHOOK_VENV;");
+		printf("echo 'Prehook: Exiting venv...';");
 	}
 	return 0;
 }
@@ -100,14 +94,14 @@ int main(void)
 	char *statusenv = getenv("PREHOOK_STATUS");
 	char *prehook_path = getenv("PREHOOK_PATH");
 	char *pwd = getenv("PWD");
-	int in_dir = exact_path_match(pwd, prehook_path);
-	setenv("PREHOOK_VENV_PATH", strdup(pwd), 1);
-	if (in_dir == 0)
+	char *in_dir = exact_path_match(pwd, prehook_path);
+	if (in_dir != NULL)
 	{
 		/* In directory */
 		if (statusenv == NULL)
 		{
 			printf("export PREHOOK_STATUS=0;");
+			printf("export PREHOOK_ROOT_DIR=%s;", pwd);
 			parse_cnf(pwd);
 			exit(0);
 		}
@@ -115,10 +109,14 @@ int main(void)
 	else
 	{
 		/* Not in directory */
-		if (strcmp("0", statusenv) == 0)
+		char *rootdir = getenv("PREHOOK_ROOT_DIR");
+		int is_sub = find_subdirectory(rootdir, pwd);
+		if (strcmp("0", statusenv) == 0 && is_sub == 1)
 		{
+			unsetenv("PREHOOK_STATUS");
 			printf("source ~/.prehook/scripts/refresh_path.sh;");
 			printf("unset PREHOOK_STATUS;");
+			printf("unset PREHOOK_ROOT_DIR;");
 			check_envs();
 			exit(0);
 		}

@@ -15,7 +15,7 @@ int set(const char *path)
 	char command[] = "source ~/.prehook/scripts/append_conn.sh ";
 	char *prehook_path = getenv("PREHOOK_PATH");
 	char *path_copy;
-	int duplicate;
+	char *duplicate;
 
 	if (strcmp(path, ".") == 0)
 		path = getenv("PWD");
@@ -23,7 +23,7 @@ int set(const char *path)
 	path_check = path_validate(path);
 	path_copy = strdup(path);
 	duplicate = exact_path_match(path_copy, prehook_path);
-	if (duplicate == 0)
+	if (duplicate != NULL)
 	{
 		printf("Prehook: This directory is already hooked\n");
 		exit(1);
@@ -62,7 +62,7 @@ int unset(const char *path)
 	char *prehook_path = getenv("PREHOOK_PATH");
 	char command[] = "source ~/.prehook/scripts/remove_conn.sh ";
 	char *path_copy;
-	int duplicate;
+	char *duplicate;
 
 	if (strcmp(path, ".") == 0)
 		path = getenv("PWD");
@@ -70,7 +70,7 @@ int unset(const char *path)
 	path_check = path_validate(path);
 	path_copy = strdup(path);
 	duplicate = exact_path_match(path_copy, prehook_path);
-	if (duplicate == 1)
+	if (duplicate == NULL)
 	{
 		printf("Prehook: This directory is not hooked.\n");
 		exit(1);
