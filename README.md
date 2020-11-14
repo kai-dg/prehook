@@ -20,6 +20,8 @@ git pull
 ## Commands
 
 - `prehook set FOLDERPATH`
+- `prehook unset FOLDERPATH`
+- `prehook list`
 
 Example:
 
@@ -34,22 +36,33 @@ Note that alias's should work, as it will just run the command in your shell.
 
 - `venv`: Add the command you use to activate venv in the folder
 - `env`: Add the command you use to apply environment variables from a file
-- `gitadd`: Coming soon
+- `gitadd`: Add the command you want to run before git adding (piping is available)
 
 ---
 
-## Folder Config Example
+## Folder Config (prehook_cnf) Example
 ```
-# prehook_cnf
-gitadd:npm run lint
 venv:source venv/bin/activate
 env:source .env
+gitadd:npm run lint | pytest
 ```
 
 ## Modifying tags
 Check `tags.c` and `prehook_bash.c`
 
 ---
+
+## Compatibility
+Currently being tested on:
+
+**OS**:
+ - [x] Linux
+ - [x] WSL (Windows)
+ - [ ] Mac
+ 
+**Shell**
+ - [x] bash
+ - [ ] zsh
 
 ## Author
 [kai-dg](https://github.com/kai-dg)
