@@ -7,7 +7,7 @@ if [[ "$PREHOOK_GADD" == "0" ]]; then
     unset PREHOOK_GADD
     eval `~/.prehook/prehook_bash`
 fi
-if [ "$(echo $PATH | grep -c '.prehook')" == "0" ]; then
+if [ "$(echo $PATH | grep -c '.prehook/bin')" == "0" ]; then
     export PATH="$HOME/.prehook/bin:$PATH"
 fi
 export PREHOOK_PATH="$(cat ~/.prehook/connections/prehook_path)"

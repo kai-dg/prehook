@@ -41,7 +41,6 @@ char *exact_path_match(char *needle, char *haystack)
 int is_directory(const char *path)
 {
 	struct stat statbuf;
-	printf("echo 'path: %s';", path);
 	if (stat(path, &statbuf) != 0)
 		return 0;
 	return S_ISDIR(statbuf.st_mode);
