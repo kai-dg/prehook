@@ -1,10 +1,29 @@
-export PATH="$HOME/.prehook/bin:$PATH"
+### PREHOOK ###
+if [[ "$PREHOOK_GADD_RUN" == "0" ]]; then
+    $PREHOOK_GADD_COMMAND
+    unset PREHOOK_GADD_COMMAND
+fi
+if [[ "$PREHOOK_GADD" == "0" ]]; then
+    unset PREHOOK_GADD
+    eval `~/.prehook/prehook_bash`
+fi
+if [ "$(echo $PATH | grep -c '.prehook')" == "0" ]; then
+    export PATH="$HOME/.prehook/bin:$PATH"
+fi
 export PREHOOK_PATH="$(cat ~/.prehook/connections/prehook_path)"
 function PreCommand() {
     if [ -z "$AT_PROMPT" ]; then
         return
     fi
     unset AT_PROMPT
+    if [[ $BASH_COMMAND == *'git add'* ]] && [ -n "$PREHOOK_GADD_CNF" ]; then
+        unset PREHOOK_STATUS
+        unset PREHOOK_VENV
+        unset PREHOOK_GADD_CNF
+        export PREHOOK_GADD_COMMAND=$BASH_COMMAND
+        export PREHOOK_GADD=0
+        exec $SHELL
+    fi
 }
 trap "PreCommand" DEBUG
 FIRST_PROMPT=1

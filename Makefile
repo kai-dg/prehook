@@ -10,6 +10,7 @@ uninstall:
 	rm ~/.prehook/bin/prehook
 	rm ~/.prehook/prehook_bash
 	rm ~/.prehook/connections/prehook_path
+	rm ~/.prehook/scripts/gadd.sh
 	rm ~/.prehook/scripts/append_conn.sh
 	rm ~/.prehook/scripts/remove_conn.sh
 	rm ~/.prehook/scripts/prehook_bash

@@ -25,13 +25,15 @@ int set(const char *path)
 	duplicate = exact_path_match(path_copy, prehook_path);
 	if (duplicate != NULL)
 	{
-		printf("Prehook: This directory is already hooked\n");
+		printf("%s: %sThis directory is already hooked%s\n",
+			TITLE_C, YEL_C, NC_C);
 		exit(1);
 	}
 
 	if (path_check == 0)
 	{
-		printf("Prehook: Setting prehook to %s\n", path);
+		printf("%s: %sSetting prehook to %s%s\n",
+			TITLE_C, GRE_C, path, NC_C);
 		strcat(command, path);
 		system(command);
 		strcat(path_copy, "/prehook_cnf");
@@ -41,13 +43,15 @@ int set(const char *path)
 		else
 		{
 			cnf = fopen(path_copy, "w");
-			printf("Prehook: Created prehook_cnf file\n");
+			printf("%s: %sCreated prehook_cnf file%s\n",
+				TITLE_C, GRE_C, NC_C);
 			fclose(cnf);
 		}
 	}
 	else
 	{
-		printf("Prehook: Please enter a valid path\n");
+		printf("%s: %sPlease enter a valid path%s\n",
+			TITLE_C, YEL_C, NC_C);
 		exit(1);
 	}
 	exit(0);
@@ -72,7 +76,8 @@ int unset(const char *path)
 	duplicate = exact_path_match(path_copy, prehook_path);
 	if (duplicate == NULL)
 	{
-		printf("Prehook: This directory is not hooked.\n");
+		printf("%s: %sThis directory is not hooked%s\n",
+			TITLE_C, YEL_C, NC_C);
 		exit(1);
 	}
 	
@@ -87,7 +92,8 @@ int unset(const char *path)
 	}
 	else
 	{
-		printf("Prehook: Please enter a valid path\n");
+		printf("%s: %sPlease enter a valid path%s\n",
+			TITLE_C, YEL_C, NC_C);
 		exit(1);
 	}
 	return 0;

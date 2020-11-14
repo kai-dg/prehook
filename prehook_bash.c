@@ -18,7 +18,7 @@ int check_envs(void)
 	{
 		printf("deactivate;");
 		printf("unset PREHOOK_VENV;");
-		printf("echo 'Prehook: Exiting venv...';");
+		printf("echo -e '%s: %sExiting venv...%s';", TITLE, RED, NC);
 	}
 	return 0;
 }
@@ -41,7 +41,8 @@ char *parse_tag(const char *tag, const char *command)
 		tag_gitadd(command);
 	}
 	else
-		printf("echo 'Prehook: %s is not a tag';", tag);
+		printf("echo -e '%s: %s%s is not a tag%s';",
+			TITLE, RED, tag, NC);
 	return NULL;
 }
 /* parse_cnf - Checks for prehook_cnf in pwd and parses it
@@ -62,7 +63,8 @@ int parse_cnf(const char *path)
 	cnf = fopen("prehook_cnf", "r");
 	if (cnf == NULL)
 	{
-		printf("echo 'Prehook: Could not find %s/prehook_cnf';", path);
+		printf("echo -e '%s: %sCould not find %s/prehook_cnf%s';",
+			TITLE, RED, path, NC);
 		exit(1);
 	}
 	while ((read = getline(&line, &len, cnf)) != -1)

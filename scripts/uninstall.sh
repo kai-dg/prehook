@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Bashrc: prehook script removal
 
-if grep -Fxq 'export PATH="$HOME/.prehook/bin:$PATH"' ~/.bashrc
+if grep -Fxq '### PREHOOK ###' ~/.bashrc
 then
     LINE=$(grep -n 'export PATH="$HOME/.prehook/bin:$PATH"' ~/.bashrc | cut -d : -f 1)
     OTHERLINES=$((LINE + 8))
