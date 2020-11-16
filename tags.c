@@ -40,17 +40,15 @@ int tag_env(const char *command)
  */
 int tag_gitadd(const char *command)
 {
-	const char *gaddenv = getenv("PREHOOK_GADD_CNF");
-	if (gaddenv == NULL)
+	const char *gaddenvcnf = getenv("PREHOOK_GADD_CNF");
+	const char *gaddenv = getenv("PREHOOK_GADD");
+	if (gaddenvcnf == NULL)
 	{
-		const char *gaddcommand = getenv("PREHOOK_GADD_COMMAND");
-		printf("echo 'command: %s';", command);
-		printf("source ~/.prehook/scripts/gadd.sh '%s';", command);
 		printf("export PREHOOK_GADD_CNF=0;");
 		printf("echo -e '%s: %sGit add is being monitored...%s';",
 			TITLE, GRE, NC);
-		if (gaddcommand != NULL)
-			printf("%s;", gaddcommand);
 	}
+	if (gaddenv != NULL)
+		printf("source ~/.prehook/scripts/gadd.sh '%s';", command);
 	return 0;
 }

@@ -5,3 +5,5 @@ prehook_cnf
 connections/prehook_path
 venv/*
 .env
+__pycache__/
+gitadd_test.py

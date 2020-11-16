@@ -16,5 +16,6 @@ if [[ $STATUS == 0 ]];then
 fi
 if [[ $STATUS != 0 ]];then
     echo -e "${CYAN} > Prehook Gitadd${NC} - ${RED}Command Failed${NC}:\n  > $1"
-    export PREHOOK_GADD_RUN=1
+    exec $SHELL
 fi
+source ~/.bashrc
