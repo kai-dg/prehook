@@ -32,10 +32,6 @@ int set(const char *path)
 
 	if (path_check == 0)
 	{
-		printf("%s: %sSetting prehook to %s%s\n",
-			TITLE_C, GRE_C, path, NC_C);
-		strcat(command, path);
-		system(command);
 		strcat(path_copy, "/prehook_cnf");
 		cnf = fopen(path_copy, "r");
 		if (cnf != NULL)
@@ -47,6 +43,8 @@ int set(const char *path)
 				TITLE_C, GRE_C, NC_C);
 			fclose(cnf);
 		}
+		strcat(command, path);
+		system(command);
 	}
 	else
 	{
@@ -64,7 +62,7 @@ int unset(const char *path)
 	FILE *cnf;
 	int path_check;
 	char *prehook_path = getenv("PREHOOK_PATH");
-	char command[] = "source ~/.prehook/scripts/remove_conn.sh ";
+	char command[] = ". ~/.prehook/scripts/remove_conn.sh ";
 	char *path_copy;
 	char *duplicate;
 
@@ -83,12 +81,12 @@ int unset(const char *path)
 	
 	if (path_check == 0)
 	{
-		strcat(command, path);
-		system(command);
 		strcat(path_copy, "/prehook_cnf");
 		cnf = fopen(path_copy, "r");
 		if (cnf != NULL)
 			remove(path_copy);
+		strcat(command, path);
+		system(command);
 	}
 	else
 	{

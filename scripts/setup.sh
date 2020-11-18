@@ -17,6 +17,6 @@ then
     echo "Prehook Install: Prehook script already found in ~/.bashrc ..."
 else
     cat ~/.prehook/scripts/prehook_bash >> ~/.bashrc
-    source ~/.bashrc
+    . ~/.bashrc
     exec $SHELL
 fi

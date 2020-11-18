@@ -102,9 +102,9 @@ int main(void)
 		/* In directory */
 		if (statusenv == NULL)
 		{
+			parse_cnf(pwd);
 			printf("export PREHOOK_STATUS=0;");
 			printf("export PREHOOK_ROOT_DIR=%s;", pwd);
-			parse_cnf(pwd);
 			exit(0);
 		}
 	}

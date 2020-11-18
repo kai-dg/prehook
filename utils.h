@@ -19,4 +19,7 @@ int find_subdirectory(const char *directory, const char *path);
 #define NC_C ((const unsigned char *)"\x1b[0m")
 #define TITLE_C ((const unsigned char *)"\x1b[36m > Prehook\x1b[0m")
 
+/* Bash Commands */
+#define BASH_REFRESH ((const char *)". ~/.bashrc")
+
 #endif /* UTILS_H */

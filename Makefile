@@ -7,21 +7,9 @@ install:
 	./scripts/setup.sh
 
 uninstall:
-	rm ~/.prehook/bin/prehook
-	rm ~/.prehook/prehook_bash
-	rm ~/.prehook/connections/prehook_path
-	rm ~/.prehook/scripts/gadd.sh
-	rm ~/.prehook/scripts/append_conn.sh
-	rm ~/.prehook/scripts/remove_conn.sh
-	rm ~/.prehook/scripts/prehook_bash
-	rm ~/.prehook/scripts/setup.sh
-	rm ~/.prehook/scripts/refresh_path.sh
-	rmdir ~/.prehook/bin
-	rmdir ~/.prehook/connections
-	source ~/.prehook/scripts/uninstall.sh
-	rm ~/.prehook/scripts/uninstall.sh
-	rmdir ~/.prehook/scripts
-	source ~/.bashrc
+	. ~/.prehook/scripts/uninstall.sh
+	rm -rf ~/.prehook
+	. ~/.bashrc
 	exec $$SHELL
 
 test:
