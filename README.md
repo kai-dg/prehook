@@ -43,7 +43,21 @@ Note that alias's should work, as it will just run the command in your shell.
 ## Folder Config (prehook_cnf) Example
 ```
 venv:source venv/bin/activate
+```
+
+Sample             |  prehook_cnf
+:-------------------------:|:-------------------------:
+![venv_1](../assets/images/prehook_venv.gif)  |  ![venv_2](../assets/images/prehook_venv_settings.png)
+
+```
 env:source .env
+```
+
+Sample             |  .env  |  prehook_cnf
+:-------------------------:|:-------------------------:|:-------------------------:
+![venv_1](../assets/images/prehook_env.gif)  | ![venv_2](../assets/images/prehook_env_contents.png) |  ![venv_3](../assets/images/prehook_env_settings.png)
+
+```
 gitadd:npm run lint | pytest
 ```
 
