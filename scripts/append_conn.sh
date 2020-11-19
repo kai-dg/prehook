@@ -5,5 +5,5 @@ GRE='\033[0;32m'
 NC='\033[0m'
 
 echo -n "$1:" >> ~/.prehook/connections/prehook_path
-echo -e " ${CYAN}> Prehook${NC}: ${GRE}Setting hook onto $1${NC}"
+echo -e " ${CYAN}> Prehook${NC}: ${GRE}Setting hook onto $1 ${NC}"
 . ~/.bashrc
