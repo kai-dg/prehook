@@ -4,5 +4,6 @@
 int tag_venv(const char *command);
 int tag_env(const char *command);
 int tag_gitadd(const char *command);
+int tag_script(const char *command);
 
 #endif /* TAGS_H */

@@ -14,12 +14,15 @@ int check_envs(void)
 {
 	/* tag.c - tag_venv */
 	const char *venv = getenv("PREHOOK_VENV");
-	if (strcmp(venv, "0") == 0)
+	const char *script = getenv("PREHOOK_SCRIPT");
+	if (venv != NULL)
 	{
 		printf("deactivate;");
 		printf("unset PREHOOK_VENV;");
 		printf("echo -e '%s: %sExiting venv...%s';", TITLE, RED, NC);
 	}
+	if (script != NULL)
+		printf("unset PREHOOK_SCRIPT;");
 	return 0;
 }
 /* parse_tag - Directs the tag to correct function
@@ -39,6 +42,10 @@ char *parse_tag(const char *tag, const char *command)
 	else if (strcmp("gitadd", tag) == 0)
 	{
 		tag_gitadd(command);
+	}
+	else if (strcmp("script", tag) == 0)
+	{
+		tag_script(command);
 	}
 	else
 		printf("echo -e '%s: %s%s is not a tag%s';",
@@ -102,10 +109,9 @@ int main(void)
 		/* In directory */
 		if (statusenv == NULL)
 		{
-			parse_cnf(pwd);
 			printf("export PREHOOK_STATUS=0;");
 			printf("export PREHOOK_ROOT_DIR=%s;", pwd);
-			exit(0);
+			parse_cnf(pwd);
 		}
 	}
 	else
@@ -115,6 +121,7 @@ int main(void)
 		int is_sub;
 		if (statusenv != NULL)
 			is_sub = find_subdirectory(rootdir, pwd);
+		/* Not in directory AND not a subdirectory */
 		if (statusenv != NULL && is_sub == 1)
 		{
 			unsetenv("PREHOOK_STATUS");
@@ -122,7 +129,6 @@ int main(void)
 			printf("unset PREHOOK_STATUS;");
 			printf("unset PREHOOK_ROOT_DIR;");
 			check_envs();
-			exit(0);
 		}
 	}
 	return 0;

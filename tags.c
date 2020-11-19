@@ -33,10 +33,9 @@ int tag_env(const char *command)
 	return 0;
 }
 
-/* tag_gitadd - Applies any tests before adding to git commit
- * TODO do a `history 1` parse if this tag is found in cnf
- * It should check for the `command` == `history 1`
- * Figure out a way to handle alias later
+/* tag_gitadd - Applies any tests/commands before adding to git commit
+ * TODO: There is an issue when trying to git add in a subdirectory
+ * Most of the parsing logic is handled in scripts/gadd.sh
  */
 int tag_gitadd(const char *command)
 {
@@ -50,5 +49,22 @@ int tag_gitadd(const char *command)
 	}
 	if (gaddenv != NULL)
 		printf("source ~/.prehook/scripts/gadd.sh '%s';", command);
+	return 0;
+}
+/* tag_script - Executes any script specified on directory entry
+ * Note that it will not execute the script when entering sub directories
+ *  > This might be an issue later on if the opposite behavior is wanted
+ */
+int tag_script(const char *command)
+{
+	const char *scriptenv = getenv("PREHOOK_SCRIPT");
+	if (scriptenv == NULL)
+	{
+		
+		printf("echo -e '%s: %sRunning script %s...%s';",
+			TITLE, GRE, command, NC);
+		printf("%s;", command);
+		printf("export PREHOOK_SCRIPT=0;");
+	}
 	return 0;
 }
