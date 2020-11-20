@@ -36,7 +36,7 @@ Note that alias's should work, as it will just run the command in your shell.
 
 - `venv`: Add the command you use to activate venv in the directory
 - `env`: Add the command you use to apply environment variables from a file in the directory
-- `gitadd`: Add the command you want to run before git adding (piping is available)
+- `gitadd`: Add the command you want to run before git adding (**piping commands is supported**)
 - `script`: Add the script/executable you want to run when entering the directory
   - Note: This will run when entering the root directory that prehook is set to. It will not run in it's subdirectories.
 ---
@@ -56,6 +56,16 @@ Note that alias's should work, as it will just run the command in your shell.
 `script` Sample             |  test.py  |  prehook_cnf
 :-------------------------:|:-------------------------:|:-------------------------:
 ![venv_1](../assets/images/prehook_script.gif)  | ![venv_2](../assets/images/prehook_script_content.png) |  ![venv_3](../assets/images/prehook_script_settings.png)
+
+
+`gitadd` (Fail *`git add` does not run) Sample             |  gitadd_test.py  |  prehook_cnf
+:-------------------------:|:-------------------------:|:-------------------------:
+![venv_1](../assets/images/prehook_gadd_fail.gif)  | ![venv_2](../assets/images/prehook_gadd_test_fail.png) |  ![venv_3](../assets/images/prehook_gadd_cnf.png)
+
+
+`gitadd` (Success * `git add` runs) Sample             |  gitadd_test.py  |  prehook_cnf
+:-------------------------:|:-------------------------:|:-------------------------:
+![venv_1](../assets/images/prehook_gadd_success.gif)  | ![venv_2](../assets/images/prehook_gadd_test_success.png) |  ![venv_3](../assets/images/prehook_gadd_cnf.png)
 
 ---
 
