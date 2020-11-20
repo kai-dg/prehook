@@ -7,10 +7,9 @@ install:
 	./scripts/setup.sh
 
 uninstall:
+	rm ~/.prehook/prehook_bash
+	rm ~/.prehook/bin/prehook
 	. ~/.prehook/scripts/uninstall.sh
-	rm -rf ~/.prehook
-	. ~/.bashrc
-	exec $$SHELL
 
 test:
 	$(CC) -Wall -Werror -pedantic -o ~/.prehook/bin/prehook prehook.c utils.c commands.c help.c
