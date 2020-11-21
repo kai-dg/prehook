@@ -1,6 +1,12 @@
 ![github version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.0.1&x2=0)
 # Prehook
-Written for primarily people that live in the terminal, or vim/emacs/nano users. The primary concept is that the script in your profile (ie bashrc) is capable of running commands before and after a prompt command is entered. This allows for automatically turning on virtualenvs or exporting environment variables, as well as running tests/lints before hitting `git add`.
+Run commands before running a command (ie `git add`), or when entering a specific directory.
+
+**Use cases**:
+ - Automatically turning on virtualenv
+ - Running tests before `git adding`
+ - Automatically applying env vars
+ - Running a script when entering the directory
 
 ## Setup
 ```
@@ -12,6 +18,7 @@ make install
 # Uninstalling
 cd ~/.prehook
 make uninstall
+rm -rf ~/.prehook
 exec $SHELL
 ```
 
@@ -25,17 +32,16 @@ git pull
 
 ## Commands
 
-- `prehook set FOLDERPATH`
-- `prehook unset FOLDERPATH`
+`prehook set FOLDERPATH`   |
+:-------------------------:|
+![set](../assets/images/prehook_set.gif) |
+
+
+`prehook unset FOLDERPATH`   |
+:-------------------------:|
+![set](../assets/images/prehook_unset.gif) |
+
 - `prehook list`
-
-Example:
-
-```
-myfolder$ prehook set .
-myfolder$ Prehook: Setting prehook to myfolder/
-myfolder$ Prehook: Created prehook_cnf file.
-```
 
 ## prehook_cnf: Accepted Tags
 Note that alias's should work, as it will just run the command in your shell.
