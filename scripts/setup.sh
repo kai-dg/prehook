@@ -12,7 +12,7 @@ then
     cp -r "$REALCWD" ~/.prehook
 fi
 
-if grep -Fxq 'export PATH="$HOME/.prehook/bin:$PATH"' ~/.bashrc
+if grep -Fxq '### PREHOOK ###' ~/.bashrc
 then
     echo "Prehook Install: Prehook script already found in ~/.bashrc ..."
 else

@@ -62,7 +62,7 @@ int unset(const char *path)
 	FILE *cnf;
 	int path_check;
 	char *prehook_path = getenv("PREHOOK_PATH");
-	char command[] = ". ~/.prehook/scripts/remove_conn.sh ";
+	char command[] = "sh ~/.prehook/scripts/remove_conn.sh ";
 	char *path_copy;
 	char *duplicate;
 
@@ -79,12 +79,15 @@ int unset(const char *path)
 		exit(1);
 	}
 	
-	if (path_check == 0)
+	if (path_check == 0 && duplicate != NULL)
 	{
 		strcat(path_copy, "/prehook_cnf");
 		cnf = fopen(path_copy, "r");
 		if (cnf != NULL)
+		{
 			remove(path_copy);
+			printf("%s: %sRemoving prehook_cnf...%s\n", TITLE_C, RED_C, NC_C);
+		}
 		strcat(command, path);
 		system(command);
 	}
@@ -94,7 +97,7 @@ int unset(const char *path)
 			TITLE_C, YEL_C, NC_C);
 		exit(1);
 	}
-	return 0;
+	exit(0);
 }
 
 /* list - Lists all prehook set paths

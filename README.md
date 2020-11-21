@@ -4,9 +4,15 @@ Written for primarily people that live in the terminal, or vim/emacs/nano users.
 
 ## Setup
 ```
+# Installing
 git clone https://github.com/kai-dg/prehook.git ~/.prehook
 cd ~/.prehook
 make install
+
+# Uninstalling
+cd ~/.prehook
+make uninstall
+exec $SHELL
 ```
 
 ## Updating Prehook
