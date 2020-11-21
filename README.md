@@ -12,6 +12,7 @@ make install
 # Uninstalling
 cd ~/.prehook
 make uninstall
+rm -rf ~/.prehook
 exec $SHELL
 ```
 
@@ -25,8 +26,15 @@ git pull
 
 ## Commands
 
-- `prehook set FOLDERPATH`
-- `prehook unset FOLDERPATH`
+`prehook set FOLDERPATH`   |
+:-------------------------:|
+![set](../assets/images/prehook_set.gif) |
+
+
+`prehook unset FOLDERPATH`   |
+:-------------------------:|
+![set](../assets/images/prehook_unset.gif) |
+
 - `prehook list`
 
 Example:
