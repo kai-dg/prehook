@@ -103,12 +103,22 @@ int unset(const char *path)
 /* list - Lists all prehook set paths
  * TODO print paths nicely
  */
-int list(const char *path)
+int list(const char *arg)
 {
 	char *prehook_path = getenv("PREHOOK_PATH");
-	if (strcmp(path, "list") == 0)
+	char *token, *pathenv, *tofree;
+	if (*prehook_path == '\0')
 	{
-		printf("%s", prehook_path);
+		printf("%s: %sNo directories have been set.%s\n", TITLE_C, YEL_C, NC_C);
+		return 0;
 	}
+	printf("%s: Directories with prehook:\n", TITLE_C);
+	tofree = pathenv = strdup(prehook_path);
+	while ((token = strsep(&pathenv, ":")))
+	{
+		if (*token != '\0')
+			printf("  > %s%s%s\n", GRE_C, token, NC_C);
+	}
+	free(tofree);
 	return 0;
 }

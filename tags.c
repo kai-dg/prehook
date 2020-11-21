@@ -36,6 +36,7 @@ int tag_env(const char *command)
 /* tag_gitadd - Applies any tests/commands before adding to git commit
  * TODO: There is an issue when trying to git add in a subdirectory
  * Most of the parsing logic is handled in scripts/gadd.sh
+ * Git add command is halted by using `exec $SHELL` if command returns fail error
  */
 int tag_gitadd(const char *command)
 {
