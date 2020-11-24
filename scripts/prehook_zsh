@@ -1,0 +1,39 @@
+### PREHOOK ###
+if [[ "$PREHOOK_GADD_RUN" == "0" ]]
+then
+    unset PREHOOK_GADD
+    unset PREHOOK_GADD_RUN
+    gaddcommand="$PREHOOK_GADD_COMMAND"
+    unset PREHOOK_GADD_COMMAND
+    eval `$gaddcommand`
+fi
+if [[ "$PREHOOK_GADD" == "1" ]]
+then
+    unset PREHOOK_STATUS 
+    unset PREHOOK_VENV
+    unset PREHOOK_GADD
+    unset PREHOOK_ENV
+    unset PREHOOK_GADD_COMMAND
+    exec $SHELL
+fi
+if [[ "$(echo $PATH | grep -c '.prehook')" == "0" ]]
+then
+    path+="$HOME/.prehook/bin"
+    export path
+fi
+export PREHOOK_PATH="$(cat ~/.prehook/connections/prehook_path)"
+# $1 is alias command, $2 is unaliased command
+precmd () {
+    preexec () {
+        if [[ $2 == *'git add'* ]] && [[ "$PREHOOK_GADD_CNF" == "0" ]]
+        then
+            unset PREHOOK_STATUS
+            unset PREHOOK_VENV
+            unset PREHOOK_GADD_CNF
+            export PREHOOK_GADD_COMMAND=$2
+            export PREHOOK_GADD=0
+            exec $SHELL
+        fi
+    }
+    eval `~/.prehook/prehook_bash`
+}

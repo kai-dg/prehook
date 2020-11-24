@@ -12,7 +12,7 @@ int set(const char *path)
 {
 	FILE *cnf;
 	int path_check;
-	char command[] = "sh ~/.prehook/scripts/append_conn.sh ";
+	char command[] = "~/.prehook/scripts/append_conn.sh ";
 	char *prehook_path = getenv("PREHOOK_PATH");
 	char *path_copy;
 	char *duplicate;
@@ -62,7 +62,7 @@ int unset(const char *path)
 	FILE *cnf;
 	int path_check;
 	char *prehook_path = getenv("PREHOOK_PATH");
-	char command[] = "sh ~/.prehook/scripts/remove_conn.sh ";
+	char command[] = "~/.prehook/scripts/remove_conn.sh ";
 	char *path_copy;
 	char *duplicate;
 

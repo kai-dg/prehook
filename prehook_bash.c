@@ -125,7 +125,7 @@ int main(void)
 		if (statusenv != NULL && is_sub == 1)
 		{
 			unsetenv("PREHOOK_STATUS");
-			printf("source ~/.prehook/scripts/refresh_path.sh;");
+			printf("~/.prehook/scripts/refresh_path.sh;");
 			printf("unset PREHOOK_STATUS;");
 			printf("unset PREHOOK_ROOT_DIR;");
 			check_envs();

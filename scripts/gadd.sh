@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Checks if test/lint command returns 
 eval $1
 STATUS=$?
@@ -16,6 +15,11 @@ if [[ $STATUS == 0 ]];then
 fi
 if [[ $STATUS != 0 ]];then
     echo -e "${CYAN} > Prehook Gitadd${NC} - ${RED}Command Failed${NC}:\n  > $1"
+    export PREHOOK_GADD=1
     exec $SHELL
 fi
-source ~/.bashrc
+if [[ "$SHELL" == *"bash"* ]]; then
+    source ~/.bashrc
+else
+    source ~/.zshrc
+fi

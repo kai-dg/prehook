@@ -49,7 +49,7 @@ int tag_gitadd(const char *command)
 			TITLE, GRE, NC);
 	}
 	if (gaddenv != NULL)
-		printf("source ~/.prehook/scripts/gadd.sh '%s';", command);
+		printf("~/.prehook/scripts/gadd.sh '%s';", command);
 	return 0;
 }
 /* tag_script - Executes any script specified on directory entry
