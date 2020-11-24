@@ -1,5 +1,5 @@
 ![github version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.0.1&x2=0)
-# Prehook
+# Prehook (BETA)
 Run commands before running a command (ie `git add`), or when entering a specific directory.
 
 **Use cases**:
@@ -7,7 +7,11 @@ Run commands before running a command (ie `git add`), or when entering a specifi
  - Running tests before `git adding`
  - Automatically applying env vars
  - Running a script when entering the directory
-
+ 
+## Compatibility
+ - Windows (WSL): **bash**
+ - Linux: **bash** | **zsh**
+ 
 ## Setup
 ```
 # Installing
@@ -48,7 +52,7 @@ Note that alias's should work, as it will just run the command in your shell.
 
 - `venv`: Add the command you use to activate venv in the directory
 - `env`: Add the command you use to apply environment variables from a file in the directory
-- `gitadd`: Add the command you want to run before git adding (**piping commands is supported**)
+- `gitadd`: Add the command you want to run before git adding (**piping multiple tests/lints will work**)
 - `script`: Add the script/executable you want to run when entering the directory
   - Note: This will run when entering the root directory that prehook is set to. It will not run in it's subdirectories.
 ---
@@ -80,18 +84,6 @@ Note that alias's should work, as it will just run the command in your shell.
 ![venv_1](../assets/images/prehook_gadd_success.gif)  | ![venv_2](../assets/images/prehook_gadd_test_success.png) |  ![venv_3](../assets/images/prehook_gadd_cnf.png)
 
 ---
-
-## Compatibility
-Currently being tested on:
-
-**OS**:
- - [x] Linux
- - [x] WSL (Windows)
- - [ ] Mac
- 
-**Shell**
- - [x] bash
- - [ ] zsh
 
 ## Author
 [kai-dg](https://github.com/kai-dg)
