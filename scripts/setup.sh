@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # When running `make install`
 
 mkdir -p ~/.prehook/connections
@@ -13,7 +14,7 @@ if [[ "$SHELL" == *"bash"* ]]; then
         . ~/.bashrc
         exec $SHELL
     fi
-else
+elif [[ "$SHELL" == *"zsh"* ]]; then
     if grep -Fxq '### PREHOOK ###' ~/.zshrc
     then
         echo "Prehook Install: Prehook script already found in ~/.zshrc ..."
@@ -22,4 +23,6 @@ else
         . ~/.zshrc
         exec $SHELL
     fi
+else
+    echo "Prehook Install: Shell type is not supported."
 fi

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Bashrc: prehook script removal
 
 if [[ "$SHELL" == *"bash"* ]]; then
@@ -13,7 +14,7 @@ if [[ "$SHELL" == *"bash"* ]]; then
     else
         echo "Prehook Uninstall: ~/.bashrc is already clean..."
     fi
-else
+elif [[ "$SHELL" == *"zsh"* ]]; then
     if grep -Fxq '### PREHOOK ###' ~/.zshrc
     then
         LINE=$(grep -n '### PREHOOK ###' ~/.zshrc | cut -d : -f 1)
@@ -26,4 +27,6 @@ else
     else
         echo "Prehook Uninstall: ~/.zshrc is already clean..."
     fi
+else
+    echo "Prehook Uninstall: Shell type is not supported."
 fi

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Checks if test/lint command returns 
 eval $1
 STATUS=$?
@@ -20,6 +21,8 @@ if [[ $STATUS != 0 ]];then
 fi
 if [[ "$SHELL" == *"bash"* ]]; then
     source ~/.bashrc
-else
+elif [[ "$SHELL" == *"zsh"* ]]; then
     source ~/.zshrc
+else
+    echo -e "${CYAN} > Prehook Gitadd${NC}: Shell type is not supported"
 fi

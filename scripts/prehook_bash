@@ -6,6 +6,14 @@ if [[ "$PREHOOK_GADD_RUN" == "0" ]]; then
     unset PREHOOK_GADD_COMMAND
     eval $gaddcommand
 fi
+if [[ "$PREHOOK_GADD" == "1" ]]; then
+    unset PREHOOK_STATUS
+    unset PREHOOK_VENV
+    unset PREHOOK_GADD
+    unset PREHOOK_ENV
+    unset PREHOOK_GADD_COMMAND
+    eval `~/.prehook/prehook_bash`
+fi
 if [[ "$PREHOOK_GADD" == "0" ]]; then
     eval `~/.prehook/prehook_bash`
 fi
