@@ -45,39 +45,3 @@ int is_directory(const char *path)
 		return 0;
 	return S_ISDIR(statbuf.st_mode);
 }
-/* find_subdirectory - Finds if given path is a subdirectory of given dir
- * Primarily for prehook_bash, as args will be env vars
- * directory: Directory to search in
- * path: subdirectory in question
- * Return: 0 if match, 1 if no match
- */
-int find_subdirectory(const char *root, const char *path)
-{
-	struct dirent* dent;
-	char *pathcopy = strdup(path);
-	char *basefolder = basename(pathcopy);
-	DIR* srcdir = opendir(root);
-	if (srcdir == NULL)
-	{
-		perror("opendir");
-		return -1;
-	}
-	while((dent = readdir(srcdir)) != NULL)
-	{
-		struct stat st;
-		if(strcmp(dent->d_name, ".") == 0 || strcmp(dent->d_name, "..") == 0)
-			continue;
-		if (fstatat(dirfd(srcdir), dent->d_name, &st, 0) < 0)
-		{
-			perror(dent->d_name);
-			continue;
-		}
-		if (S_ISDIR(st.st_mode))
-		{
-			if (strcmp(basefolder, dent->d_name) == 0)
-				return 0;
-		}
-	}
-	closedir(srcdir);
-	return 1;
-}

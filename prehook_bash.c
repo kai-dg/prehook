@@ -118,11 +118,11 @@ int main(void)
 	{
 		/* Not in directory */
 		char *rootdir = getenv("PREHOOK_ROOT_DIR");
-		int is_sub;
+		char *is_sub;
 		if (statusenv != NULL)
-			is_sub = find_subdirectory(rootdir, pwd);
+			is_sub = strstr(pwd, rootdir);
 		/* Not in directory AND not a subdirectory */
-		if (statusenv != NULL && is_sub == 1)
+		if (statusenv != NULL && is_sub == NULL)
 		{
 			unsetenv("PREHOOK_STATUS");
 			printf("~/.prehook/scripts/refresh_path.sh;");

@@ -3,7 +3,6 @@
 
 int path_validate(const char* path);
 char *exact_path_match(char *needle, char *haystack);
-int find_subdirectory(const char *directory, const char *path);
 
 /* Bash Text Colors */
 #define RED ((const unsigned char *)"\\033[1;31m")
