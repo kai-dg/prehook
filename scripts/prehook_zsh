@@ -35,5 +35,5 @@ precmd () {
             exec $SHELL
         fi
     }
-    eval `~/.prehook/prehook_bash`
+    eval `~/.prehook/prehookshell`
 }
